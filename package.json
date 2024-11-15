@@ -7,11 +7,8 @@
     "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
-    "prisma:migrate": "dotenv -e .env -- npx prisma migrate dev",
-    "prisma:generate": "npx prisma generate",
-    "prisma:deploy": "dotenv -e .env -- npx prisma migrate deploy",
-    "seed-db": "dotenv -e .env -- node ./prisma/seed.ts",
-    "postinstall": "prisma generate"
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "seed-db": "dotenv -e .env -- node ./prisma/seed.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^9.2.0",
