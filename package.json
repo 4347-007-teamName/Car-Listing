@@ -7,7 +7,7 @@
     "build": "prisma generate && dotenv -e .env -- node ./prisma/seed.ts && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "vercel-build": "prisma generate && dotenv -e .env -- node ./prisma/seed.ts && prisma migrate deploy && next build",
     "seed-db": "dotenv -e .env -- node ./prisma/seed.ts"
   },
   "dependencies": {
