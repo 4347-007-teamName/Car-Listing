@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 const prisma = new PrismaClient();
 
 export default async function Home() {
