@@ -9,26 +9,26 @@ datasource db {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model buyer {
-  username      String    @db.VarChar(50)
+  buyerusername      String    @db.VarChar(50)
   numofpurchase Int?   @default(0)
   buyerrating   Float?
-  users         user  @relation(fields: [username], references: [username], onDelete: Cascade)
+  users         user  @relation(fields: [buyerusername], references: [username], onDelete: Cascade)
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model financinginfo {
-  username     String    @db.VarChar(50)
+  sellerusername     String    @db.VarChar(50)
   interestrate Decimal? @db.Decimal(3, 2)
-  seller       seller   @relation(fields: [username], references: [username], onDelete: Cascade)
+  seller       seller   @relation(fields: [sellerusername], references: [susername], onDelete: Cascade)
 }
 
 model listing {
-  username         String    @db.VarChar(50)
+  sellerusername         String    @db.VarChar(50)
   vinnum      String   @db.VarChar(17)
   price       Decimal  @db.Decimal(10, 2)
   description String?
   datelisted  DateTime @db.Date
-  users       user    @relation(fields: [username], references: [username], onDelete: Cascade)
+  users       user    @relation(fields: [sellerusername], references: [susername], onDelete: Cascade)
   vehicle     vehicle  @relation(fields: [vinnum], references: [vinnum], onDelete: Cascade)
 
   @@id([username, vinnum])
@@ -36,12 +36,12 @@ model listing {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model seller {
-  username         String    @db.VarChar(50)
+  susername         String    @db.VarChar(50)
   numofsale        Int?           @default(0)
   sellerrating     Float?
   financingoffered Boolean?
   financinginfo    financinginfo?
-  users            user          @relation(fields: [username], references: [username], onDelete: Cascade)
+  users            user          @relation(fields: [susername], references: [username], onDelete: Cascade)
 }
 
 model user {
