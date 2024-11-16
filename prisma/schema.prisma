@@ -28,7 +28,7 @@ model listing {
   price       Decimal  @db.Decimal(10, 2)
   description String?
   datelisted  DateTime @db.Date
-  users       user    @relation(fields: [sellerusername], references: [susername], onDelete: Cascade)
+  users       user    @relation(fields: [sellerusername], references: [username], onDelete: Cascade)
   vehicle     vehicle  @relation(fields: [vinnum], references: [vinnum], onDelete: Cascade)
 
   @@id([sellerusername, vinnum])
