@@ -9,42 +9,43 @@ datasource db {
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model buyer {
-  buyerusername      String    @db.VarChar(50)
+  userid        Int    @id
   numofpurchase Int?   @default(0)
   buyerrating   Float?
-  users         user  @relation(fields: [buyerusername], references: [username], onDelete: Cascade)
+  users         user  @relation(fields: [userid], references: [userid], onDelete: Cascade)
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model financinginfo {
-  sellerusername     String    @db.VarChar(50)
+  sellerid     Int      @id
   interestrate Decimal? @db.Decimal(3, 2)
-  seller       seller   @relation(fields: [sellerusername], references: [susername], onDelete: Cascade)
+  seller       seller   @relation(fields: [sellerid], references: [userid], onDelete: Cascade)
 }
 
 model listing {
-  sellerusername         String    @db.VarChar(50)
+  sellerid    Int
   vinnum      String   @db.VarChar(17)
   price       Decimal  @db.Decimal(10, 2)
   description String?
   datelisted  DateTime @db.Date
-  users       user    @relation(fields: [sellerusername], references: [username], onDelete: Cascade)
+  users       user    @relation(fields: [sellerid], references: [userid], onDelete: Cascade)
   vehicle     vehicle  @relation(fields: [vinnum], references: [vinnum], onDelete: Cascade)
 
-  @@id([sellerusername, vinnum])
+  @@id([sellerid, vinnum])
 }
 
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 model seller {
-  susername         String    @db.VarChar(50)
+  userid           Int            @id
   numofsale        Int?           @default(0)
   sellerrating     Float?
   financingoffered Boolean?
   financinginfo    financinginfo?
-  users            user          @relation(fields: [susername], references: [username], onDelete: Cascade)
+  users            user          @relation(fields: [userid], references: [userid], onDelete: Cascade)
 }
 
 model user {
+  userid     Int       @id
   username   String    @db.VarChar(50)
   firstname  String    @db.VarChar(50)
   middleinit String?   @db.Char(1)
