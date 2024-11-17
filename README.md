@@ -8,15 +8,17 @@ Make sure you have the following installed on your machine:
 - **Node.js**
 - **npm**
 - A **PostgreSQL** or **MySQL** database (or other supported database)
+- **docker**
 
 ### Configuration
 1. Create a `.env` file in the root directory of your project.
-2. Add the following line to your `.env` file, replacing the placeholders with your actual database credentials:
+2. Add the following line to your `.env` file, make sure the placeholders match with your actual docker credentials:
    ```plaintext
    DB_URL="provider://username:password@localhost:port/database"
 
 OR: `cp .env.example .env` and change the URL
-
+(make sure your docker is connected before build or run the project,
+you can either use `docker compose up` to start the container or start it manually inside the docker desktop)
 3. `npm i` or `npm install`: Initializes your project by downloading all the required packages listed in your package.json file. It creates a node_modules directory where all the dependencies will be stored.
 4. `npm run prisma:generate`: Re-generate the prisma client. This will update the types in `@prisma/client` to reflect any changes in the schema.
 5. `npm run prisma:migrate`: Create prisma migration files. Should be run after changing the schema in `schema/prisma.schema`.
@@ -25,7 +27,7 @@ OR: `cp .env.example .env` and change the URL
 ## Commands (to use during development)
 - `npm run dev`: Start the development server.
 - `npx prisma studio`: Start the database server and interact with your data in Prisma projects.
-- `npm run build`: Build the project.
+- `npm run build`: Build the project.(doing this can skip the step 4, 5, 6 above)
 - `npm run start`: Start the production server.
 - `npm run lint`: Lint the project.
 - `npm run prisma:generate`: Re-generate the prisma client. This will update the types in `@prisma/client` to reflect any changes in the schema.
