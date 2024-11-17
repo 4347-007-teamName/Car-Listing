@@ -14,16 +14,18 @@ async function seed() {
 // Seed users
 const createMany = await prisma.user.createMany({
   data: [
-    { userid: 1, username: 'john_doe', firstname: 'John', middleinit: 'A', lastname: 'Doe' },
-    { userid: 2, username: 'jane_smith', firstname: 'Jane', middleinit: 'B', lastname: 'Smith' },
-    { userid: 3, username: 'mark_johnson', firstname: 'Mark', middleinit: 'C', lastname: 'Johnson' },
-    { userid: 4, username: 'lisa_brown', firstname: 'Lisa', middleinit: 'D', lastname: 'Brown' },
-    { userid: 5, username: 'peter_parker', firstname: 'Peter', middleinit: 'E', lastname: 'Parker' },
-    { userid: 6, username: 'clark_kent', firstname: 'Clark', middleinit: 'F', lastname: 'Kent' },
-    { userid: 7, username: 'bruce_wayne', firstname: 'Bruce', middleinit: 'G', lastname: 'Wayne' },
-    { userid: 8, username: 'tony_stark', firstname: 'Tony', middleinit: 'H', lastname: 'Stark' },
-    { userid: 9, username: 'natasha_romanoff', firstname: 'Natasha', middleinit: 'I', lastname: 'Romanoff' },
-    { userid: 10, username: 'diana_prince', firstname: 'Diana', middleinit: 'J', lastname: 'Prince' },
+    { userid: 1, username: 'john_doe', firstname: 'John', middleinit: 'A', lastname: 'Doe', isAdmin: false },
+    { userid: 2, username: 'jane_smith', firstname: 'Jane', middleinit: 'B', lastname: 'Smith', isAdmin: false },
+    { userid: 3, username: 'mark_johnson', firstname: 'Mark', middleinit: 'C', lastname: 'Johnson', isAdmin: false },
+    { userid: 4, username: 'lisa_brown', firstname: 'Lisa', middleinit: 'D', lastname: 'Brown', isAdmin: false },
+    { userid: 5, username: 'peter_parker', firstname: 'Peter', middleinit: 'E', lastname: 'Parker', isAdmin: false },
+    { userid: 6, username: 'clark_kent', firstname: 'Clark', middleinit: 'F', lastname: 'Kent', isAdmin: false},
+    { userid: 7, username: 'bruce_wayne', firstname: 'Bruce', middleinit: 'G', lastname: 'Wayne', isAdmin: false },
+    { userid: 8, username: 'tony_stark', firstname: 'Tony', middleinit: 'H', lastname: 'Stark', isAdmin: false },
+    { userid: 9, username: 'natasha_romanoff', firstname: 'Natasha', middleinit: 'I', lastname: 'Romanoff', isAdmin: false },
+    { userid: 10, username: 'diana_prince', firstname: 'Diana', middleinit: 'J', lastname: 'Prince', isAdmin: false },
+    { userid: 11, username: 'admin', firstname: 'admin', middleinit: 'A', lastname: 'admin', isAdmin: true },
+
   ]
 });
 

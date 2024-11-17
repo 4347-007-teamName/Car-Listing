@@ -50,6 +50,7 @@ model user {
   firstname  String    @db.VarChar(50)
   middleinit String?   @db.Char(1)
   lastname   String    @db.VarChar(50)
+  isAdmin    Boolean   @default(false)
   buyer      buyer?
   listing    listing[]
   seller     seller?
