@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import CompareButton from '@/components/ui/compareButton';
 const prisma = new PrismaClient();
 
 export default async function Home() {
@@ -12,8 +13,13 @@ export default async function Home() {
         {cars.map((vehicle) => (
           <Card key={vehicle.vinnum} className="shadow-lg hover:shadow-xl transition">
             <CardHeader>
-              <CardTitle>{vehicle.year} - {vehicle.make} {vehicle.model} - {vehicle.trim_lvl}</CardTitle>
+              <CardTitle>
+                {vehicle.year} - {vehicle.make} {vehicle.model} - {vehicle.trim_lvl}
+              </CardTitle>
             </CardHeader>
+            <div>
+              <CompareButton vin={vehicle.vinnum} />
+            </div>
             <div className="flex justify-between p-6 pt-0">
               <a
                 href={`/vehicles/${vehicle.vinnum}`}
@@ -25,6 +31,10 @@ export default async function Home() {
           </Card>
         ))}
       </div>
+
+      <div id="comparison-section" className="flex flex-wrap gap-4 mt-6 p-6 border-t-2 border-gray-200">
+      </div>
+
     </div>
   );
 }
