@@ -49,10 +49,16 @@ export default function EditVehicle() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const payload = {
+        ...formData,
+        mileage: parseInt(formData.mileage, 10),
+        year: parseInt(formData.year, 10),
+      };
+
       const res = await fetch(`/api/vehicles/${vinnum}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       if (!res.ok) {
