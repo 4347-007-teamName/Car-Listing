@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import { PrismaClient } from '@prisma/client';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import CompareButton from '@/components/ui/compareButton';
@@ -34,7 +36,6 @@ export default async function Home() {
 
       <div id="comparison-section" className="flex flex-wrap gap-4 mt-6 p-6 border-t-2 border-gray-200">
       </div>
-
     </div>
   );
 }

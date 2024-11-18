@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface Vehicle {
   vinnum: string;
@@ -27,12 +28,13 @@ interface Seller {
 
 export default function VehicleDetail() {
   const pathname = usePathname();
-  const vinnum = pathname?.split('/').pop();
+  const vinnum = pathname?.split("/").pop();
 
   const [vehicle, setVehicle] = useState<Vehicle | null>(null);
   const [listing, setListing] = useState<Listing | null>(null);
   const [seller, setSeller] = useState<Seller | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (vinnum) {
@@ -40,31 +42,31 @@ export default function VehicleDetail() {
         try {
           const vehicleRes = await fetch(`/api/vehicles/${vinnum}`);
           if (!vehicleRes.ok) {
-            throw new Error('Vehicle not found');
+            throw new Error("Vehicle not found");
           }
           const vehicleData: Vehicle = await vehicleRes.json();
           setVehicle(vehicleData);
 
           const listingRes = await fetch(`/api/listings/${vinnum}`);
           if (!listingRes.ok) {
-            throw new Error('Listing not found');
+            throw new Error("Listing not found");
           }
           const listingData: Listing = await listingRes.json();
-          console.log('Fetched Listing:', listingData);
+          console.log("Fetched Listing:", listingData);
           setListing(listingData);
 
           if (listingData.sellerid) {
             const sellerRes = await fetch(`/api/users/${listingData.sellerid}`);
             if (!sellerRes.ok) {
-              throw new Error('Seller not found');
+              throw new Error("Seller not found");
             }
             const sellerData: Seller = await sellerRes.json();
-            console.log('Fetched Seller:', sellerData);
+            console.log("Fetched Seller:", sellerData);
             setSeller(sellerData);
           }
         } catch (err) {
-          console.error('Error:', err);
-          setError('Error occurred while fetching data');
+          console.error("Error:", err);
+          setError("Error occurred while fetching data");
         }
       };
 
@@ -100,32 +102,34 @@ export default function VehicleDetail() {
 
         <div className="flex justify-between">
           <span className="font-medium text-gray-600">Trim Level:</span>
-          <span className="text-gray-800">{vehicle.trim_lvl || 'N/A'}</span>
+          <span className="text-gray-800">{vehicle.trim_lvl || "N/A"}</span>
         </div>
 
         <div className="flex justify-between">
           <span className="font-medium text-gray-600">Mileage:</span>
-          <span className="text-gray-800">{vehicle.mileage.toLocaleString()} miles</span>
+          <span className="text-gray-800">
+            {vehicle.mileage.toLocaleString()} miles
+          </span>
         </div>
 
         <div className="flex justify-between">
           <span className="font-medium text-gray-600">Color:</span>
-          <span className="text-gray-800">{vehicle.color || 'N/A'}</span>
+          <span className="text-gray-800">{vehicle.color || "N/A"}</span>
         </div>
 
         <div className="flex justify-between">
           <span className="font-medium text-gray-600">Type:</span>
-          <span className="text-gray-800">{vehicle.type || 'N/A'}</span>
+          <span className="text-gray-800">{vehicle.type || "N/A"}</span>
         </div>
 
-        {/* {seller && (
-          <div className="flex justify-between">
-            <span className="font-medium text-gray-600">Seller:</span>
-            <span className="text-gray-800">
-              {seller.firstname} {seller.middleinit ? `${seller.middleinit}.` : ''} {seller.lastname}
-            </span>
-          </div>
-        )} */}
+        <div className="flex justify-center items-center mt-4">
+          <button
+            onClick={() => router.push("/")}
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Back to Homepage
+          </button>
+        </div>
       </div>
     </div>
   );
